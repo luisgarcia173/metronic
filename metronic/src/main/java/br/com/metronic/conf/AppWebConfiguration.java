@@ -39,16 +39,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.common.cache.CacheBuilder;
 
-import br.com.metronic.controllers.HomeController;
-import br.com.metronic.daos.UserDAO;
-import br.com.metronic.models.User;
-import br.com.metronic.utils.FileSaver;
 import br.com.metronic.viewresolver.CustomXMLViewResolver;
 import br.com.metronic.viewresolver.JsonViewResolver;
 import br.com.metronic.viewresolver.SampleRssViewResolver;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, UserDAO.class, FileSaver.class, User.class })
+//@ComponentScan(basePackageClasses = { HomeController.class, UserDAO.class, FileSaver.class, User.class })
+@ComponentScan(basePackages = { "br.com.metronic.controllers", "br.com.metronic.daos", "br.com.metronic.models", "br.com.metronic.utils"})
 @EnableCaching
 @PropertySource("classpath:/mail.properties")
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
@@ -65,7 +62,6 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
-		resolver.setExposedContextBeanNames("shoppingCart");
 		return resolver;
 	}
 	

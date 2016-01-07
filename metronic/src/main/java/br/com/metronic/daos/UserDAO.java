@@ -26,10 +26,10 @@ public class UserDAO implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		String jpql = "select u from User u where u.login = :login";
-		List<User> users = manager.createQuery(jpql, User.class).setParameter("login", username).getResultList();
+		String jpql = "select u from User u where u.username = :username";
+		List<User> users = manager.createQuery(jpql, User.class).setParameter("username", username).getResultList();
 		if (users.isEmpty()) {
-			throw new UsernameNotFoundException("O usuario " + username + " não existe");
+			throw new UsernameNotFoundException("The user " + username + " was not found");
 		}
 		return users.get(0);
 	}
@@ -40,14 +40,14 @@ public class UserDAO implements UserDetailsService {
 		manager.persist(user);
 	}
 	
-	public void saveRole(Role role) {
-		manager.persist(role);
-	}
-	
 	public List<User> listUsers(){
 		return manager
 				.createQuery("select distinct(u) from User u", User.class)
 				.getResultList();
+	}
+	
+	public void saveRole(Role role) {
+		manager.persist(role);
 	}
 	
 	public List<Role> listRoles(){

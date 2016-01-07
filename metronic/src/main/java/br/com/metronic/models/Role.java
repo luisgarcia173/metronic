@@ -6,9 +6,13 @@ import javax.persistence.Id;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public @Data class Role implements GrantedAuthority {
 
 	/** Serial Version */

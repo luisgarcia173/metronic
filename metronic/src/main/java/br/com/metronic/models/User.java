@@ -23,7 +23,7 @@ public @Data class User implements UserDetails {
 	
 	@Id
 	@NotBlank
-	private String login;
+	private String username;
 	@NotBlank
 	private String password;
 	@NotBlank
@@ -43,7 +43,7 @@ public @Data class User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return login;
+		return username;
 	}
 
 	@Override
