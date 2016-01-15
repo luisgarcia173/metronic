@@ -28,17 +28,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //			.antMatchers("/users/form").hasRole("ADMIN")
 //			.antMatchers(HttpMethod.POST,"/users").hasRole("ADMIN")
 //			.antMatchers("/users/**").hasRole("ADMIN")
-			//.antMatchers("/dashboard/**").permitAll()
 			.antMatchers("/signup").permitAll()
 			.antMatchers("/forget").permitAll()
 			.antMatchers("/PRIVACY_POLICY.pdf").permitAll()
 			.antMatchers("/TERMS_OF_SERVICE.pdf").permitAll()
 			.anyRequest().authenticated()
+			.antMatchers("/**", "/logout").hasAnyRole("USER","ADMIN")
+			.antMatchers("/dashboard/**").hasAnyRole("USER","ADMIN")
 			.and()
 				.formLogin().loginPage("/login").permitAll().failureUrl("/login?to=error")
 			    .usernameParameter("username").passwordParameter("password")		
-			.and()
-			    .logout().logoutSuccessUrl("/login?to=logout")
+			/*.and()
+			    .logout().logoutSuccessUrl("/login?to=logout")*/
 			.and()
 			    .csrf();
 	}

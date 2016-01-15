@@ -1,17 +1,10 @@
 package br.com.metronic.service;
 
-import java.math.BigDecimal;
-
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.async.DeferredResult;
-import org.springframework.web.servlet.ModelAndView;
-
-import br.com.metronic.models.PaymentData;
-
 public class IntegrandoComPagamento implements Runnable {
 
-	private DeferredResult<ModelAndView> result;
+	public void run() {}
+	
+	/*private DeferredResult<ModelAndView> result;
 	private BigDecimal value;
 	private RestTemplate restTemplate;
 
@@ -33,6 +26,6 @@ public class IntegrandoComPagamento implements Runnable {
 			modelAndView.addObject("paymentMessage", "Transação não foi aceita pela operadora");
 		}
 		result.setResult(modelAndView);
-	}
+	}*/
 
 }
