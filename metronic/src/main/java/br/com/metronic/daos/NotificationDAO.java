@@ -43,6 +43,7 @@ public class NotificationDAO {
 		// Get ResultSet
 		return manager
 				.createQuery(jpql, Notification.class).setParameter("types", listTypes)
+				.setMaxResults(8)
 				.getResultList();
 	}
 
