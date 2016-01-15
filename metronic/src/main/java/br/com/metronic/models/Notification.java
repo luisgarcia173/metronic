@@ -33,7 +33,7 @@ public @Data class Notification {
 	@DateTimeFormat
 	private Calendar createdDate;
 	@NotBlank
-	private byte read;
+	private byte read = 0;
 	@Transient
 	private String time;
 	

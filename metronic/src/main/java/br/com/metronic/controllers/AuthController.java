@@ -72,6 +72,7 @@ public class AuthController {
 			return login("signup-err", user);	
 		}
 		
+		//TODO intercept by aspect the user registration as ("New User Registered.", NEW)
 		user.getRoles().add(new Role("ROLE_USER"));
 		userDAO.saveUser(user);
 		return login("signup-ok", user);
