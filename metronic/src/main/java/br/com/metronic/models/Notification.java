@@ -17,9 +17,13 @@ import org.joda.time.Hours;
 import org.joda.time.Minutes;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public @Data class Notification {
 
 	@Id
@@ -27,12 +31,12 @@ public @Data class Notification {
 	private Integer id;
 	@NotBlank
 	private String description;
+	private String details;
 	@NotBlank
 	@Enumerated(EnumType.STRING)
 	private NotificationType type;
 	@DateTimeFormat
 	private Calendar createdDate;
-	@NotBlank
 	private byte read = 0;
 	@Transient
 	private String time;

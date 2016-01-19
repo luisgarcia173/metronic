@@ -35,6 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.antMatchers("/**", "/logout").hasAnyRole("USER","ADMIN")
 			.antMatchers("/dashboard/**").hasAnyRole("USER","ADMIN")
+			.antMatchers("/notification/**").hasAnyRole("USER","ADMIN")
 			.and()
 				.formLogin().loginPage("/login").permitAll().failureUrl("/login?to=error")
 			    .usernameParameter("username").passwordParameter("password")		
@@ -60,6 +61,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(users).passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
+	/**
+	 * Responsible for create an intance of Crypt
+	 * @return
+	 */
 	@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
