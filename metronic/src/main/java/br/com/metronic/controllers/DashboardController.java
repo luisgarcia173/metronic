@@ -24,8 +24,9 @@ public class DashboardController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView("dashboard/index");
-		modelAndView.addObject("notifications", notificationDAO.list(securityUtil.userHasAdminRole()));
+		ModelAndView modelAndView = new ModelAndView("dashboard/dash");
+		modelAndView.addObject("notifications", notificationDAO.list(securityUtil.userHasAdminRole(), 5));
+		modelAndView.addObject("notificationQuantity", notificationDAO.list(securityUtil.userHasAdminRole()).size());
 		return modelAndView;
 	}
 	

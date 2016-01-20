@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,11 @@ public class NotificationDAO {
 		manager.persist(notification);
 	}
 	
-	public List<Notification> list(boolean userHasAdminRole){
+	public List<Notification> list(boolean userHasAdminRole) {
+		return this.list(userHasAdminRole, 0);
+	}
+	
+	public List<Notification> list(boolean userHasAdminRole, int maxResults){
 		
 		// Define Notification Type
 		List<NotificationType> listTypes = null;
@@ -40,11 +45,17 @@ public class NotificationDAO {
 				    + " and n.read = 0"
 				    + " order by n.createdDate desc";
 		
+		// Set JPA Query
+		TypedQuery<Notification> query = manager
+				.createQuery(jpql, Notification.class).setParameter("types", listTypes);
+		
+		// Set Max Result
+		if (maxResults > 0) {
+			query.setMaxResults(maxResults);
+		}
+		
 		// Get ResultSet
-		return manager
-				.createQuery(jpql, Notification.class).setParameter("types", listTypes)
-				.setMaxResults(8)
-				.getResultList();
+		return query.getResultList();
 	}
 
 }

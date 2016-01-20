@@ -25,22 +25,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-//			.antMatchers("/users/form").hasRole("ADMIN")
-//			.antMatchers(HttpMethod.POST,"/users").hasRole("ADMIN")
-//			.antMatchers("/users/**").hasRole("ADMIN")
-			.antMatchers("/signup").permitAll()
-			.antMatchers("/forget").permitAll()
-			.antMatchers("/PRIVACY_POLICY.pdf").permitAll()
-			.antMatchers("/TERMS_OF_SERVICE.pdf").permitAll()
+			.antMatchers("/signup", "/forget").permitAll()
+			.antMatchers("/PRIVACY_POLICY.pdf", "/TERMS_OF_SERVICE.pdf").permitAll()
 			.anyRequest().authenticated()
-			.antMatchers("/**", "/logout").hasAnyRole("USER","ADMIN")
+			.antMatchers("/logout").hasAnyRole("USER","ADMIN")
 			.antMatchers("/dashboard/**").hasAnyRole("USER","ADMIN")
 			.antMatchers("/notification/**").hasAnyRole("USER","ADMIN")
 			.and()
-				.formLogin().loginPage("/login").permitAll().failureUrl("/login?to=error")
+				.formLogin().loginPage("/login").defaultSuccessUrl("/dashboard", true).failureUrl("/login?to=error").permitAll()
 			    .usernameParameter("username").passwordParameter("password")		
-			/*.and()
-			    .logout().logoutSuccessUrl("/login?to=logout")*/
 			.and()
 			    .csrf();
 	}
