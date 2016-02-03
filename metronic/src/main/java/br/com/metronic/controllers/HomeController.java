@@ -18,7 +18,6 @@ import br.com.metronic.utils.SecurityUtil;
 @Controller
 public class HomeController {
 	
-	
 	@Autowired
 	private NotificationDAO notificationDAO;
 	
