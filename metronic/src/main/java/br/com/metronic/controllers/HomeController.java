@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import br.com.metronic.daos.NotificationDAO;
 import br.com.metronic.models.Notification;
 import br.com.metronic.utils.SecurityUtil;
@@ -31,13 +34,11 @@ public class HomeController {
 	public ModelAndView notifications() {
 		ModelAndView modelAndView = new ModelAndView("notification/feed");
 		
-		boolean isAdmin = securityUtil.userHasAdminRole();
-		List<Notification> notifications = notificationDAO.list(isAdmin);
+		List<Notification> notifications = notificationDAO.list(securityUtil.userHasAdminRole());
 		
-		modelAndView.addObject("notifications", notificationDAO.list(isAdmin, 5));
+		modelAndView.addObject("notifications", Lists.newArrayList(Iterables.limit(notifications, 5)));
 		modelAndView.addObject("allNotifications", notifications);
 		modelAndView.addObject("notificationQuantity", notifications.size());
-		modelAndView.addObject("isAdmin", isAdmin);
 		
 		return modelAndView;
 	}
