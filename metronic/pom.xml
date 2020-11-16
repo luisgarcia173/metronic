@@ -45,7 +45,7 @@
 		<mysql.version>5.1.38</mysql.version>
 		<validation.version>1.0.0.GA</validation.version>
 		<jackson.version>2.5.1</jackson.version>
-		<xstream.version>1.4.8</xstream.version>
+		<xstream.version>1.4.13-java7</xstream.version>
 		<rome.version>1.5.1</rome.version>
 		<guava.version>18.0</guava.version>
 		<spring.security.version>4.0.0.M2</spring.security.version>
